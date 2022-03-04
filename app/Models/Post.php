@@ -35,14 +35,8 @@ class Post extends Model
     );
     }
 
-    public static function find($fileName): string
+    public static function find($slug)
     {
-        if (!file_exists( $path = resource_path("posts/{$fileName}.html"))) {
-            throw new ModelNotFoundException();
-        }
-
-        return cache()->remember("posts.{$fileName}", now() , fn() => file_get_contents($path));
-
-
+        return collect(self::getAll())->firstWhere(['slug' => $slug]);
     }
 }
