@@ -23,20 +23,34 @@ class Post extends Model
 
     public static function getAll()
     {
-        return collect(File::files(resource_path("posts/")))
-        ->map(fn($file) => YamlFrontMatter::parseFile($file))
-        ->map(fn($document) => new Post(
-            $document->title,
-            $document->excerpt,
-            $document->date,
-            $document->body(),
-            $document->slug,
-        )
-    );
+        return cache()->rememberForever('posts.all', function () {
+            return collect(File::files(resource_path("posts/")))
+            ->map(fn($file) => YamlFrontMatter::parseFile($file))
+            ->map(fn($document) => new Post(
+                $document->title,
+                $document->excerpt,
+                $document->date,
+                $document->body(),
+                $document->slug,
+            ))
+            ->sortByDesc('date');
+        });
     }
 
     public static function find($slug)
     {
-        return collect(self::getAll())->firstWhere(['slug' => $slug]);
+        return self::getAll()->firstWhere('slug', $slug);
+    }
+
+    public static function findOrFail($slug)
+    {
+
+        $post = static::find($slug);
+
+        if (!$post) {
+            throw new ModelNotFoundException();
+        }
+
+        return $post;
     }
 }
