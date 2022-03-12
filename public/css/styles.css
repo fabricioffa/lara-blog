@@ -3,6 +3,7 @@ body {
     margin: auto;
     font-family: sans-serif;
     color: #333;
+    background-color: aliceblue;
 }
 
 article + article {
@@ -13,4 +14,13 @@ article + article {
 
 p {
     line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+    color: darkslateblue;
+}
+
+a:hover {
+    text-decoration: underline;
 }
