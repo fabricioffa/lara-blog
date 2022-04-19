@@ -13,7 +13,12 @@
                         Name
                     </label>
 
-                    <input class="border border-gray-400 p-2 w-full" type="text" name="name" id="name" required>
+                    <input class="border border-gray-400 p-2 w-full" type="text" value="{{ old('name') }}" name="name"
+                        id="name" required>
+
+                    @error('name')
+                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <div class="mb-6">
@@ -21,7 +26,12 @@
                         Usarname
                     </label>
 
-                    <input class="border border-gray-400 p-2 w-full" type="text" name="username" id="username" required>
+                    <input class="border border-gray-400 p-2 w-full" type="text" value="{{ old('username') }}"
+                        name="username" id="username" required>
+
+                    @error('username')
+                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <div class="mb-6">
@@ -29,7 +39,12 @@
                         Email
                     </label>
 
-                    <input class="border border-gray-400 p-2 w-full" type="text" name="email" id="email" required>
+                    <input class="border border-gray-400 p-2 w-full" type="text" value="{{ old('email') }}"
+                        name="email" id="email" required>
+
+                    @error('email')
+                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <div class="mb-6">
@@ -37,11 +52,16 @@
                         Password
                     </label>
 
-                    <input class="border border-gray-400 p-2 w-full" type="password" name="password" id="password" required>
+                    <input class="border border-gray-400 p-2 w-full" type="password" name="password" id="password"
+                        required>
+
+                    @error('password')
+                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <div class="mb-6">
-                    <button class="bg-blue-400 text-white rounded py-2 px-4 hover:bg-blue-500" type="submit" >
+                    <button class="bg-blue-400 text-white rounded py-2 px-4 hover:bg-blue-500" type="submit">
                         Submit
                     </button>
                 </div>
